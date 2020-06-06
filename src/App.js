@@ -24,7 +24,7 @@ class App extends React.Component {
   }
 
   async getPokemonByName(search) {
-    await this.resetState();
+    this.state.error && await this.resetState();
     try {
         const pokemon = await getPokemonByName(search);
         this.setState({ pokemon: pokemon });

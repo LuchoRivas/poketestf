@@ -9,8 +9,9 @@ const PokeCard = (props) => {
                 <Card.Body>
                     <Card.Title className="text-capitalize">{props.pokemon.name}</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                        {
+                            props.pokemon.species[0].flavor_text
+                        }
                     </Card.Text>
                     <Button variant="primary">Ver mas</Button>
                 </Card.Body>

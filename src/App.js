@@ -11,15 +11,31 @@ class App extends React.Component {
 
   state = {
     pokemon: undefined,
-    search: undefined
+    search: undefined,
+    error: undefined
   };
 
-  async getPokemonByName(search){
-    getPokemonByName(search).then((res) => {
-      this.setState({
-        pokemon: res
-      });
-    });
+  async resetState() {
+    this.setState({
+      pokemon: undefined,
+      search: undefined,
+      error: undefined
+    })
+  }
+
+  async getPokemonByName(search) {
+    await this.resetState();
+    try {
+        const pokemon = await getPokemonByName(search);
+        this.setState({ pokemon: pokemon });
+    }
+    catch(err) {
+      console.log(err)
+      if(err.response.status === 500) {
+        const error = err.response.statusText;
+        this.setState({ error: error });
+      }
+    }
   }
 
   handleChange(event) {
@@ -51,8 +67,12 @@ class App extends React.Component {
                 this.state.pokemon &&
                 <React.Fragment>
                   <h1 className="text-capitalize align-self-center">{this.state.pokemon.name}</h1>
-                  <img src={`${this.state.pokemon.sprites.front_default}`}></img>
+                  <img alt="pokemon_image" src={`${this.state.pokemon.sprites.front_default}`}></img>
                 </React.Fragment>
+              }
+              {
+                this.state.error &&
+                  <span>{'No se encontraron resultados'}</span>
               }
             </Col>
           </Row>

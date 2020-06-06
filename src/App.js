@@ -24,13 +24,12 @@ class App extends React.Component {
   };
 
   async getPokemonByName(search) {
-    // this.state.error && await this.resetState();
+    this.state.error && await this.resetState();
     try {
         const pokemon = await getPokemonByName(search);
         this.setState({ pokemon: pokemon });
     }
     catch(err) {
-      console.log(err)
       if(err.response.status === 500) {
         const error = err.response.statusText
         this.state.pokemon && await this.resetState();

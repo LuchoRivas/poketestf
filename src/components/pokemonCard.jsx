@@ -4,7 +4,7 @@ import { Card, Button } from "react-bootstrap";
 const PokeCard = (props) => {
     return(
         <React.Fragment>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }} className={`pokemon-type-${props.pokemon.types[0].type.name}`}>
                 <Card.Img variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
                 <Card.Body>
                     <Card.Title className="text-capitalize">{props.pokemon.name}</Card.Title>

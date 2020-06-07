@@ -6,7 +6,7 @@ const PokeCard = (props) => {
     const [isShiny, setShiny] = React.useState(false);
     const [modalShow, setModalShow] = React.useState(false);
 
-    const toggleShinny = () => {
+    const toggleShiny = () => {
         setShiny(shiny => !shiny);
     }
 
@@ -17,7 +17,7 @@ const PokeCard = (props) => {
                 <Card style={{ width: '18rem' }} className={`pokemon-type-${props.pokemon.types[0].type.name}`}>
                     <Card.Img hidden={isShiny} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
                     <Card.Img hidden={!isShiny} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
-                    <Form.Check onClick={toggleShinny} className="px-3" inline label="shinny" id={'shinny'} />
+                    <Form.Check onClick={toggleShiny} className="px-3" inline label="shiny" id={'shiny'} />
                     <Card.Body>
                         <Card.Title className="text-capitalize">{props.pokemon.name}</Card.Title>
                         <Card.Text>

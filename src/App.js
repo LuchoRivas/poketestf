@@ -7,7 +7,7 @@ class App extends React.Component {
   render(){
     return(
       <React.Fragment>
-        <Navbar expand="lg" variant="dark" bg="dark">
+        <Navbar expand="lg" variant="dark" bg="dark" className="border-bottom">
           <Navbar.Brand href="#">Pokédex</Navbar.Brand>
         </Navbar>
         <Container>

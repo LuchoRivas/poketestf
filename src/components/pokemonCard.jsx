@@ -25,7 +25,7 @@ const PokeCard = (props) => {
                                 props.pokemon.species[0].flavor_text
                             }
                         </Card.Text>
-                        <Button onClick={() => setModalShow(true)} variant="primary">Ver mas</Button>
+                        <Button onClick={() => setModalShow(true)} variant="dark">Ver mas</Button>
                     </Card.Body>
                 </Card>
             }

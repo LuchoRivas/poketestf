@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Col, Row, Badge } from "react-bootstrap";
 
 const DetailModal = (props) => {
+    const pokemon = props.pokemonData || undefined;
     return (
       <Modal
         {...props}
@@ -10,21 +11,34 @@ const DetailModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+          <Modal.Title id="contained-modal-title-vcenter" className="text-capitalize">
+            {pokemon.name}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </p>
+            {
+            pokemon.stats &&
+                <Row>
+                    <Col xs={3}>
+                        <p>N° {pokemon.id}</p>
+                        {
+                            pokemon.types.map(pokemonType => 
+                                   <h5 className="text-uppercase d-inline"><Badge variant="dark">{pokemonType.type.name}</Badge></h5>
+                            )
+                        }
+                    </Col>
+                    <Col xs={3}>
+                        {
+                            pokemon.stats.map(pokemonStat => 
+                                <ul class="list-group">
+                                    <li class="list-group-item">{pokemonStat.stat.name}: {pokemonStat.base_stat}</li>
+                                </ul>
+                            )
+                        }
+                    </Col>
+                </Row>
+            }
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }

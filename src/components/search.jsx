@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import { getPokemonByName } from "../services/pokemonService";
 import PokeCard from "../components/pokemonCard";
+import SearchAlert from "../components/alert";
 
 class Search extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class Search extends Component {
         }
         catch(err) {
           if(err.response.status === 500) {
-            const error = err.response.statusText
+            const error = 'No se encontraron resultados';
             this.state.pokemon && await this.resetState();
             this.setState({ error: error });
           }
@@ -54,7 +55,11 @@ class Search extends Component {
                 </InputGroup>
                 {
                     this.state.pokemon &&
-                    <PokeCard pokemon={this.state.pokemon}></PokeCard>
+                        <PokeCard pokemon={this.state.pokemon}></PokeCard>
+                }
+                {
+                    this.state.error &&
+                        <SearchAlert errorMsg={this.state.error}></SearchAlert>
                 }
             </React.Fragment>
         )

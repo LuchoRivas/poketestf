@@ -30,6 +30,7 @@ const PokeCard = (props) => {
                 </Card>
             }
                 <DetailModal
+                pokemonData={props.pokemon}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 />

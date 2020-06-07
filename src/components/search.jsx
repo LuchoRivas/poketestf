@@ -12,7 +12,7 @@ class Search extends Component {
     
     state = {
         pokemon: undefined,
-        search: undefined,
+        search: '',
         error: undefined
     };
 
@@ -38,7 +38,7 @@ class Search extends Component {
     async resetState() {
         this.setState({
           pokemon: undefined,
-          search: undefined,
+          search: '',
           error: undefined
         })
     };
@@ -51,7 +51,7 @@ class Search extends Component {
                     <InputGroup.Prepend>
                         <Button onClick={(search) => this.getPokemonByName(this.state.search)} variant="outline-secondary">Search</Button>
                     </InputGroup.Prepend>
-                    <FormControl aria-describedby="basic-addon1" onChange={this.handleChange} value={this.state.search}/>
+                    <FormControl type="text" name="search" aria-describedby="basic-addon1" onChange={this.handleChange} value={this.state.search}/>
                 </InputGroup>
                 {
                     this.state.pokemon &&

@@ -3,7 +3,7 @@ import { Card, Button, Form } from "react-bootstrap";
 import DetailModal from "./detailmodal";
 
 const PokeCard = (props) => {
-    const [isShiny, setShinny] = React.useState(false);
+    const [isShiny, setShiny] = React.useState(false);
     const [modalShow, setModalShow] = React.useState(false);
 
     const toggleShinny = () => {

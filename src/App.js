@@ -1,19 +1,17 @@
 import React from 'react';
 import './App.css';
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Navbar } from "react-bootstrap";
 import Search from "./components/search";
 class App extends React.Component {
 
   render(){
     return(
       <React.Fragment>
+        <Navbar expand="lg" variant="dark" bg="dark">
+          <Navbar.Brand href="#">Pokédex</Navbar.Brand>
+        </Navbar>
         <Container>
-          <Row>
-            <Col>
-              <h3 className="text-center">POKEDEX TEST</h3>
-            </Col>
-          </Row>
-          <Row className="d-flex justify-content-center">
+          <Row className="d-flex justify-content-center mt-3">
             <Col xs={6}>
               <Search></Search>
             </Col>

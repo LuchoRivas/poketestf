@@ -49,9 +49,9 @@ class Search extends Component {
             <React.Fragment>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
-                        <Button onClick={(search) => this.getPokemonByName(this.state.search)} variant="outline-secondary">Search</Button>
+                        <Button onClick={(search) => this.getPokemonByName(this.state.search)} variant="outline-secondary">Buscar</Button>
                     </InputGroup.Prepend>
-                    <FormControl type="text" name="search" aria-describedby="basic-addon1" onChange={this.handleChange} value={this.state.search}/>
+                    <FormControl placeholder="ej: pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={this.handleChange} value={this.state.search}/>
                 </InputGroup>
                 {
                     this.state.pokemon &&

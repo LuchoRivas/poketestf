@@ -1,38 +1,69 @@
-.App {
-  text-align: center;
+/* Custom CSS */
+
+.pokemon-type-normal {
+  background-color: #a8a878;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.pokemon-type-fire {
+  background-color: #f08030;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.pokemon-type-water {
+  background-color: #6890f0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.pokemon-type-grass {
+  background-color: #78c850;
 }
 
-.App-link {
-  color: #61dafb;
+.pokemon-type-electric {
+  background-color: #f8d030;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pokemon-type-ice {
+  background-color: #98d8d8;
+}
+
+.pokemon-type-fighting {
+  background-color: #c03028;
+}
+
+.pokemon-type-poison {
+  background-color: #a040a0;
+}
+
+.pokemon-type-ground {
+  background-color: #e0c068;
+}
+
+.pokemon-type-flying {
+  background-color: #a040a0;
+}
+
+.pokemon-type-bug {
+  background-color: #a8b820;
+}
+
+.pokemon-type-rock {
+  background-color: #b8a038;
+}
+
+.pokemon-type-ghost {
+  background-color: #705898;
+}
+
+.pokemon-type-dark {
+  background-color: #705848;
+}
+
+.pokemon-type-dragon {
+  background-color: #7038f8;
+}
+
+.pokemon-type-steel {
+  background-color: #b8b8d0;
+}
+
+.pokemon-type-fairy {
+  background-color: #f0b6bc;
 }

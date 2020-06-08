@@ -36,6 +36,16 @@ const DetailModal = (props) => {
                             )
                         }
                     </Col>
+                    {/* Evolution panel */}
+                    {/* <Col xs={3}>
+                      {
+                        pokemon.evolutions && pokemon.evolutions.chain.evolves_to.map(pokemonEvolution => 
+                              <ul class="list-group">
+                                  <li class="list-group-item">{pokemonEvolution.species.name}</li>
+                              </ul>
+                          )
+                      }
+                    </Col> */}
                 </Row>
             }
         </Modal.Body>

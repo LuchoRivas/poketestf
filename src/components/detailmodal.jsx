@@ -23,7 +23,7 @@ const DetailModal = (props) => {
                         <p>N° {pokemon.id}</p>
                         {
                             pokemon.types.map(pokemonType => 
-                                   <h5 className="text-uppercase d-inline"><Badge variant="dark">{pokemonType.type.name}</Badge></h5>
+                              <h5 className="text-uppercase d-inline"><Badge className={`pokemon-type-${pokemonType.type.name}`} variant="dark">{pokemonType.type.name}</Badge>{' '}</h5>
                             )
                         }
                     </Col>

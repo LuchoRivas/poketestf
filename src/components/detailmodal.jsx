@@ -10,12 +10,12 @@ const DetailModal = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
+        <Modal.Header className="bg-dark text-white" closeButton>
           <Modal.Title id="contained-modal-title-vcenter" className="text-capitalize">
             {pokemon.name}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bg-dark text-white">
             {
             pokemon.stats &&
                 <Row>
@@ -28,24 +28,19 @@ const DetailModal = (props) => {
                         }
                     </Col>
                     <Col xs={3}>
-                          <ul className="list-group">
                           {
                             pokemon.stats.map(pokemonStat => 
-                                    <li key={`stat_${pokemonStat.stat.name}`} className="list-group-item">{pokemonStat.stat.name}: {pokemonStat.base_stat}</li>
+                              <div><span className="text-capitalize" key={`stat_${pokemonStat.stat.name}`}>{pokemonStat.stat.name}: {pokemonStat.base_stat}</span><br/></div>
                             )
                           }
-                          </ul>
                     </Col>
-                    {/* Evolution panel */}
-                    {/* <Col xs={3}>
+                    <Col xs={3}>
                       {
-                        pokemon.evolutions && pokemon.evolutions.chain.evolves_to.map(pokemonEvolution => 
-                              <ul className="list-group">
-                                  <li className="list-group-item">{pokemonEvolution.species.name}</li>
-                              </ul>
+                        pokemon.evolutions && pokemon.evolutions.map((pokemonEvolution, i) => 
+                            <div><span key={`${pokemonEvolution.id}_${i}`} className="text-white text-capitalize">{pokemonEvolution.name}</span><br/></div>
                           )
                       }
-                    </Col> */}
+                    </Col>
                 </Row>
             }
         </Modal.Body>

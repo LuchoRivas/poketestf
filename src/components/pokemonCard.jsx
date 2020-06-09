@@ -29,12 +29,12 @@ const PokeCard = (props) => {
                     </Card.Body>
                 </Card>
             }
-                <DetailModal
+            <DetailModal
                 key={props.pokemon.id}
                 pokemon_data={props.pokemon}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                />
+            />
         </React.Fragment>
     )
 }

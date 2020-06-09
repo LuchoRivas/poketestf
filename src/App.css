@@ -89,3 +89,11 @@
   background-color: #f858886b !important;
   color: #e0e0e0;
 }
+
+.modal-header .close, .close:not(:disabled):not(.disabled):hover {
+  color: #FFF;
+}
+
+.close:not(:disabled):not(.disabled):focus {
+  outline: none;
+}

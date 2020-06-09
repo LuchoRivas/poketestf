@@ -12,7 +12,7 @@ class App extends React.Component {
         </Navbar>
         <Container>
           <Row className="d-flex justify-content-center mt-3">
-            <Col xs={6}>
+            <Col xs={12}>
               <Search></Search>
             </Col>
           </Row>

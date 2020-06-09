@@ -20,6 +20,12 @@ class Search extends Component {
         this.setState({search: event.target.value});
     };
 
+    _handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            this.getPokemonByName(this.state.search)
+        }
+    }
+
     async getPokemonByName(search) {
         this.state.error && await this.resetState();
         try {
@@ -47,15 +53,15 @@ class Search extends Component {
     render () {
         return(
             <React.Fragment>
-                <InputGroup className="mb-3">
+                <InputGroup className="mb-3 col-8 offset-2">
                     <InputGroup.Prepend>
                         <Button onClick={(search) => this.getPokemonByName(this.state.search)} className="border" variant="dark">Buscar</Button>
                     </InputGroup.Prepend>
-                    <FormControl placeholder="ej: pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={this.handleChange} value={this.state.search}/>
+                    <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={this.handleChange} onKeyPress={this._handleKeyDown} value={this.state.search}/>
                 </InputGroup>
                 {
                     this.state.pokemon &&
-                        <PokeCard pokemon={this.state.pokemon}></PokeCard>
+                        <PokeCard pokemon={this.state.pokemon} ></PokeCard>
                 }
                 {
                     this.state.error &&

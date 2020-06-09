@@ -30,14 +30,14 @@ const DetailModal = (props) => {
                     <Col xs={3}>
                           {
                             pokemon.stats.map(pokemonStat => 
-                              <div><span className="text-capitalize" key={`stat_${pokemonStat.stat.name}`}>{pokemonStat.stat.name}: {pokemonStat.base_stat}</span><br/></div>
+                              <div key={`stat_${pokemonStat.stat.name}`}><span className="text-capitalize" key={`stat_${pokemonStat.stat.name}`}>{pokemonStat.stat.name}: {pokemonStat.base_stat}</span><br/></div>
                             )
                           }
                     </Col>
                     <Col xs={3}>
                       {
                         pokemon.evolutions && pokemon.evolutions.map((pokemonEvolution, i) => 
-                            <div><span key={`${pokemonEvolution.id}_${i}`} className="text-white text-capitalize">{pokemonEvolution.name}</span><br/></div>
+                            <div key={`${pokemonEvolution.id}_${i}`}><span key={`${pokemonEvolution.id}_${i}`} className="text-white text-capitalize">{pokemonEvolution.name}</span><br/></div>
                           )
                       }
                     </Col>

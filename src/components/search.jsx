@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Button, InputGroup, FormControl } from "react-bootstrap";
+import { Button, InputGroup, FormControl, Row, Form } from "react-bootstrap";
 import { getPokemonByName } from "../services/pokemonService";
 import PokeCard from "../components/pokemonCard";
+import MainPokeCard from "../components/mainPokemonCard";
 import SearchAlert from "../components/alert";
 
 class Search extends Component {
@@ -61,7 +62,10 @@ class Search extends Component {
                 </InputGroup>
                 {
                     this.state.pokemon &&
-                        <PokeCard pokemon={this.state.pokemon} ></PokeCard>
+                    <Row>
+                        <MainPokeCard pokemon={this.state.pokemon}></MainPokeCard>
+                        <PokeCard pokemon={this.state.pokemon}></PokeCard>
+                    </Row>
                 }
                 {
                     this.state.error &&

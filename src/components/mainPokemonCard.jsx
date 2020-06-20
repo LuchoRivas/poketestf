@@ -10,7 +10,7 @@ const MainPokemonCard = (props) => {
         <React.Fragment>
             {
                 props &&
-                    <Col xs={9}>
+                    <Col xs={8}>
                         <Card className={`pokemon-type-${color1}`}>
                             <Card.Body>
                                 <Card.Title className="text-capitalize">{props.pokemon.name}</Card.Title>

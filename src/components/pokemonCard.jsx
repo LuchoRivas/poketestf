@@ -16,42 +16,7 @@ const PokeCard = (props) => {
         <React.Fragment>
             {
                 props &&
-                <Row>
-                    <Col class="col-9">
-                        <Card className={`pokemon-type-${color1}`}>
-                            <Card.Body>
-                                <Card.Title className="text-capitalize">{props.pokemon.name}</Card.Title>
-                                <div>{
-                                    props.pokemon.types.map(pokemonType =>
-                                        <h8 className="text-uppercase d-inline"><Badge className={`pokemon-type-${pokemonType.type.name}`} variant="dark">{pokemonType.type.name}</Badge>{' '}</h8>
-                                    )
-                                }</div>
-                                <Card.Text>
-                                    {
-                                        props.pokemon.species[0].flavor_text
-                                    }
-                                </Card.Text>
-                                <Col>
-                                    <Card.Img hidden={isShiny} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
-                                    <Card.Img hidden={isShiny || imgCol === 'col-6'} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_female || ''}`} />
-                                </Col>
-                                <Col>
-                                    <Card.Img hidden={!isShiny} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
-                                    <Card.Img hidden={!isShiny || imgCol === 'col-6'} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny_female || ''}`} />
-                                </Col>
-                                <Row hidden={imgCol === 'col-6'}>
-                                    <span className={imgCol}>Macho</span>
-                                    <span className={imgCol}>Hembra</span>
-                                </Row>
-                                <div><span>Variaciones:</span><br/>{
-                                    props.pokemon.variations.varieties.map(varieties =>
-                                        <h8 className="text-capitalize"><span variant="dark">{varieties.pokemon.name}</span><br/></h8>
-                                    )
-                                }</div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="col-3">
+                    <Col className="col-4">
                         <Card className={`pokemon-type-${color1}`}>
                             <Card.Img hidden={isShiny} className="col-12" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
                             <Card.Img hidden={!isShiny} className="col-12" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
@@ -78,7 +43,6 @@ const PokeCard = (props) => {
                             </Card.Body>
                         </Card>
                     </Col>
-                </Row>
             }
             <DetailModal
                 key={props.pokemon.id}

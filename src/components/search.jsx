@@ -29,16 +29,20 @@ class Search extends Component {
 
     async getPokemonByName(search) {
         this.state.error && await this.resetState();
-        try {
-            const pokemon = await getPokemonByName(search);
-            this.setState({ pokemon: pokemon });
+        try { 
+            let { pokemon } = this.state;
+            pokemon = await getPokemonByName(search);
+            this.setState({ pokemon });
         }
         catch(err) {
-          if(err.response.status === 500) {
-            const error = 'No se encontraron resultados';
-            this.state.pokemon && await this.resetState();
-            this.setState({ error: error });
-          }
+            if (err.response.status === 500) {
+                const error = 'No se encontraron resultados';
+                this.state.pokemon && await this.resetState();
+                this.setState({ error: error });
+            }
+            else {
+                console.log(err);
+            }
         }
     };
 
@@ -54,7 +58,7 @@ class Search extends Component {
     render () {
         return(
             <React.Fragment>
-                <InputGroup className="mb-3 col-8 offset-2">
+                <InputGroup className="">
                     <InputGroup.Prepend>
                         <Button onClick={(search) => this.getPokemonByName(this.state.search)} className="border" variant="dark">Buscar</Button>
                     </InputGroup.Prepend>
@@ -62,7 +66,7 @@ class Search extends Component {
                 </InputGroup>
                 {
                     this.state.pokemon &&
-                    <Row>
+                    <Row className="d-flex justify-content-center mt-3">
                         <MainPokeCard pokemon={this.state.pokemon}></MainPokeCard>
                         <PokeCard pokemon={this.state.pokemon}></PokeCard>
                     </Row>

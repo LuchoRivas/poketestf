@@ -11,7 +11,7 @@ const PokeCard = (props) => {
     }
     const color1 = props.pokemon.types[0].type.name;
     const color2 = props.pokemon.types[1] ? props.pokemon.types[1].type.name : false;
-    const imgCol = props.pokemon.sprites.front_female ? 'col-4' : 'col-6'
+    const imgCol = props.pokemon.sprites.front_female ? 'col-4' : 'col-6';
     return (
         <React.Fragment>
             {
@@ -33,16 +33,21 @@ const PokeCard = (props) => {
                                 </Card.Text>
                                 <Col>
                                     <Card.Img hidden={isShiny} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
-                                    <Card.Img hidden={isShiny || imgCol === 'col-12'} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_female || ''}`} />
+                                    <Card.Img hidden={isShiny || imgCol === 'col-6'} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_female || ''}`} />
                                 </Col>
                                 <Col>
                                     <Card.Img hidden={!isShiny} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
-                                    <Card.Img hidden={!isShiny || imgCol === 'col-12'} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny_female || ''}`} />
+                                    <Card.Img hidden={!isShiny || imgCol === 'col-6'} className={imgCol} variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny_female || ''}`} />
                                 </Col>
-                                <Row hidden={imgCol === 'col-12'}>
-                                    <p className={imgCol}>Macho</p>
-                                    <p className={imgCol}>Hembra</p>
+                                <Row hidden={imgCol === 'col-6'}>
+                                    <span className={imgCol}>Macho</span>
+                                    <span className={imgCol}>Hembra</span>
                                 </Row>
+                                <div><span>Variaciones:</span><br/>{
+                                    props.pokemon.variations.varieties.map(varieties =>
+                                        <h8 className="text-capitalize"><span variant="dark">{varieties.pokemon.name}</span><br/></h8>
+                                    )
+                                }</div>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -58,9 +63,11 @@ const PokeCard = (props) => {
                                         <h8 className="text-uppercase d-inline"><Badge className={`pokemon-type-${pokemonType.type.name}`} variant="dark">{pokemonType.type.name}</Badge>{' '}</h8>
                                     )
                                 }</div>
-                                <div><p>Variaciones:</p>{
-                                    props.pokemon.variations.varieties.map(varieties =>
-                                        <p className={`pokemon-type-${varieties.pokemon.name}`} variant="dark">{varieties.pokemon.name}</p>
+                                <div><span>Habilidades:</span><br />{
+                                    props.pokemon.abilities.map(abilities =>
+                                        abilities.is_hidden === false ?
+                                            <h8 className="text-capitalize"><span className="text-white">{abilities.ability.name}</span><br /></h8> : 
+                                            <h8 className="text-capitalize"><span className="text-warning">{abilities.ability.name} (Oculta) </span><br /></h8>
                                     )
                                 }</div>
                                 <Button onClick={() => setModalShow(true)} variant="dark">Ver mas</Button>

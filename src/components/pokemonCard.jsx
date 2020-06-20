@@ -66,8 +66,12 @@ const PokeCard = (props) => {
                                 <div><span>Habilidades:</span><br />{
                                     props.pokemon.abilities.map(abilities =>
                                         abilities.is_hidden === false ?
-                                            <h8 className="text-capitalize"><span className="text-white">{abilities.ability.name}</span><br /></h8> : 
+                                            <h8 className="text-capitalize"><span className="text-white">{abilities.ability.name}</span><br /></h8> :
                                             <h8 className="text-capitalize"><span className="text-warning">{abilities.ability.name} (Oculta) </span><br /></h8>
+                                    )
+                                }
+                                    {props.pokemon.types.map((pokemonType, i) =>
+                                        <h6 key={`badge2_${pokemonType.type.name}_${i}`} className="text-uppercase d-inline"><Badge className={`pokemon-type-${pokemonType.type.name}`} variant="dark">{pokemonType.type.name}</Badge>{' '}</h6>
                                     )
                                 }</div>
                                 <Button onClick={() => setModalShow(true)} variant="dark">Ver mas</Button>
@@ -77,7 +81,8 @@ const PokeCard = (props) => {
                 </Row>
             }
             <DetailModal
-                pokemonData={props.pokemon}
+                key={props.pokemon.id}
+                pokemon_data={props.pokemon}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />

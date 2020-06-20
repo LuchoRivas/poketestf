@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, Badge, Row, Col } from "react-bootstrap";
+import PokemonEvolicions from "../components/pokemonEvolucitions";
 
 const MainPokemonCard = (props) => {
     const [isShiny, setShiny] = React.useState(false);
 
     const color1 = props.pokemon.types[0].type.name;
-    const imgCol = props.pokemon.sprites.front_female !== null ? 'col-4' : 'col-6'
+    const female = props.pokemon.sprites.front_female;
     return (
         <React.Fragment>
             {
@@ -28,26 +29,35 @@ const MainPokemonCard = (props) => {
                                 </Card.Text>
                                 <Row>
                                     <Col xs={12} className={"d-flex justify-content-center"}>
-                                        <Card.Img hidden={isShiny} className="col-6" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
+                                        <Card.Img hidden={isShiny} className="w-25" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
                                         {
-                                            props.pokemon.sprites.front_female &&
-                                            <Card.Img hidden={isShiny || imgCol === 'col-12'} className="col-6" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_female || ''}`} /> 
+                                            female &&
+                                        <Card.Img className="w-25" variant="top" alt="pokemon_image" src={`${female || ''}`} /> 
                                         }
                                     </Col>
                                     <Col>
-                                        <Card.Img hidden={!isShiny} className="col-6" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
-                                        <Card.Img hidden={!isShiny || imgCol === 'col-12'} className="col-6" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny_female || ''}`} />
+                                    <Card.Img hidden={!isShiny} className="w-25" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
+                                    {
+                                        female &&
+                                        <Card.Img hidden={!isShiny} className="w-25" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny_female || ''}`} />
+                                    }
                                     </Col>
                                 </Row>
-                                <Row hidden={imgCol === 'col-12'}>
-                                    <p className={imgCol}>Macho</p>
-                                    {
-                                        props.pokemon.sprites.front_female &&
-                                        <p className={imgCol}>Hembra</p>
+                            <Row className="d-flex justify-content-center mt-3 col-12">
+                                {female &&
+                                    <Badge className="col-3">Macho</Badge>
                                     }
-                                </Row>
-                            </Card.Body>
-                        </Card>
+                                    {
+                                        female &&
+                                    <Badge className="col-3 ">Hembra</Badge>
+                                    }
+                            </Row>
+                            {
+                                props.pokemon.evolutions &&
+                                <PokemonEvolicions evolutions={props.pokemon.evolutions}></PokemonEvolicions>
+                            }
+                        </Card.Body>
+                    </Card>
                     </Col>
             }
         </React.Fragment>

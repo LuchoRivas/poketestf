@@ -10,16 +10,14 @@ const PokeCard = (props) => {
         setShiny(shiny => !shiny);
     }
     const color1 = props.pokemon.types[0].type.name;
-    const color2 = props.pokemon.types[1] ? props.pokemon.types[1].type.name : false;
-    const imgCol = props.pokemon.sprites.front_female ? 'col-4' : 'col-6';
     return (
         <React.Fragment>
             {
                 props &&
                     <Col className="col-4">
                         <Card className={`pokemon-type-${color1}`}>
-                            <Card.Img hidden={isShiny} className="col-12" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
-                            <Card.Img hidden={!isShiny} className="col-12" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
+                        <Card.Img hidden={isShiny} className="w-50" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_default}`} />
+                        <Card.Img hidden={!isShiny} className="w-50" variant="top" alt="pokemon_image" src={`${props.pokemon.sprites.front_shiny}`} />
                             <Form.Check onClick={toggleShiny} className="px-3" inline label="shiny" id={'shiny'} />
                             <Card.Body>
                                 <Card.Title className="text-capitalize">{props.pokemon.name}</Card.Title>
@@ -33,10 +31,6 @@ const PokeCard = (props) => {
                                         abilities.is_hidden === false ?
                                             <h8 className="text-capitalize"><span className="text-white">{abilities.ability.name}</span><br /></h8> :
                                             <h8 className="text-capitalize"><span className="text-warning">{abilities.ability.name} (Oculta) </span><br /></h8>
-                                    )
-                                }
-                                    {props.pokemon.types.map((pokemonType, i) =>
-                                        <h6 key={`badge2_${pokemonType.type.name}_${i}`} className="text-uppercase d-inline"><Badge className={`pokemon-type-${pokemonType.type.name}`} variant="dark">{pokemonType.type.name}</Badge>{' '}</h6>
                                     )
                                 }</div>
                                 <Button onClick={() => setModalShow(true)} variant="dark">Ver mas</Button>

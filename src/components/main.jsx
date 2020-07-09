@@ -4,6 +4,7 @@ import { getPokemonByName } from "../services/pokemonService";
 import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
 import SearchAlert from "./alert";
+import TypesDropdown from "./typesDropdown";
 
  export default function Main () {
 
@@ -57,6 +58,7 @@ import SearchAlert from "./alert";
         <div>
             <InputGroup className="mb-3 col-8 offset-2">
                 <InputGroup.Prepend>
+                    <TypesDropdown></TypesDropdown>
                     <Button onClick={onPokemonSearch} className="border" variant="dark">Buscar</Button>
                 </InputGroup.Prepend>
                 <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={handleChange} onKeyPress={handleKeyDown} value={search}/>

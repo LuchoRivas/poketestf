@@ -1,7 +1,7 @@
 /**
  * Pokemon types
 */
-modules.exports.pokemonTypes = [
+module.exports.pokemonTypes = [
     'normal',
     'fire',
     'water',

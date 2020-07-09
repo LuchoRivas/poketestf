@@ -12,7 +12,7 @@ export default function Main () {
     const [search, setSearch] = useState('');
     const [error, setError] = useState(null);
     const [isShiny, setShiny] = useState(false);
-    const [show, setShow] = useState(false);
+    const [showSweetAlert, setShowSweetAlert] = useState(false);
     
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -43,7 +43,7 @@ export default function Main () {
           }
           else {
             // muestra el sweet alert de error
-            setShow(true)
+            setShowSweetAlert(true)
           }
         }
     };
@@ -80,8 +80,8 @@ export default function Main () {
             }
             {/* Sweet alert de error */}
             <Swal
-                show={show}
-                setShow={setShow}
+                showSweetAlert={showSweetAlert}
+                setShowSweetAlert={setShowSweetAlert}
                 title={'Error'}
                 text={'Algo esta mal'}
                 type={'error'}

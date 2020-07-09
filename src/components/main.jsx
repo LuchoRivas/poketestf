@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, InputGroup, FormControl, Row, Form } from "react-bootstrap";
 import { getPokemonByName } from "../services/pokemonService";
 import PokeCard from "./pokemonCard";
@@ -12,20 +12,23 @@ import SearchAlert from "./alert";
     const [error, setError] = useState(null);
 
     const handleChange = (event) => {
-        setSearch(search);
+        setSearch(event.target.value);
     };
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            this.getPokemonByName(search)
+            getPokemonByName(search)
         }
     }
 
-    const getPokeByName = async (search) => {
+    
+
+    const getPokeByName = async () => {
         error && await resetState();
         try {
-            const pokemon_result = await getPokemonByName(search);
-            setPokemon(pokemon = pokemon_result);
+            let searchValue = search;
+            const pokemon_result = await getPokemonByName(searchValue);
+            setPokemon(pokemon_result);
         }
         catch(err) {
           if(err.response.status === 500) {
@@ -42,25 +45,29 @@ import SearchAlert from "./alert";
         setError(null);
     };
 
-        return(
-            <React.Fragment>
-                <InputGroup className="mb-3 col-8 offset-2">
-                    <InputGroup.Prepend>
-                        <Button onClick={(search) => getPokeByName(search)} className="border" variant="dark">Buscar</Button>
-                    </InputGroup.Prepend>
-                    <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={handleChange} onKeyPress={handleKeyDown} value={search}/>
-                </InputGroup>
-                {
-                    pokemon &&
-                    <Row>
-                        <MainPokeCard pokemon={pokemon}></MainPokeCard>
-                        <PokeCard pokemon={pokemon}></PokeCard>
-                    </Row>
-                }
-                {
-                    error &&
-                        <SearchAlert errorMsg={error}></SearchAlert>
-                }
-            </React.Fragment>
-        )
+    useEffect(() => {
+        console.log("ASDASD")
+      }, [search]);
+
+    return(
+        <div>
+            <InputGroup className="mb-3 col-8 offset-2">
+                <InputGroup.Prepend>
+                    <Button onClick={(search) => getPokeByName(search)} className="border" variant="dark">Buscar</Button>
+                </InputGroup.Prepend>
+                <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={handleChange} onKeyPress={handleKeyDown} value={search}/>
+            </InputGroup>
+            {
+                pokemon &&
+                <Row>
+                    <MainPokeCard pokemon={pokemon}></MainPokeCard>
+                    <PokeCard pokemon={pokemon}></PokeCard>
+                </Row>
+            }
+            {
+                error &&
+                    <SearchAlert errorMsg={error}></SearchAlert>
+            }
+        </div>
+    )
 }

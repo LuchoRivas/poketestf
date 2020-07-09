@@ -8,7 +8,7 @@ import SearchAlert from "./alert";
  export default function Main () {
 
     const [pokemon, setPokemon] = useState(null);
-    const [search, setSearch] = useState(null);
+    const [search, setSearch] = useState('');
     const [error, setError] = useState(null);
 
     const handleChange = (event) => {

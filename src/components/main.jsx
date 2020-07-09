@@ -15,13 +15,15 @@ import SearchAlert from "./alert";
         setSearch(event.target.value);
     };
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = async (e) => {
         if (e.key === 'Enter') {
-            getPokemonByName(search)
+            await getPokeByName();
         }
     }
 
-    
+    const onPokemonSearch = async () => {
+        await getPokeByName();
+    };
 
     const getPokeByName = async () => {
         error && await resetState();
@@ -53,7 +55,7 @@ import SearchAlert from "./alert";
         <div>
             <InputGroup className="mb-3 col-8 offset-2">
                 <InputGroup.Prepend>
-                    <Button onClick={(search) => getPokeByName(search)} className="border" variant="dark">Buscar</Button>
+                    <Button onClick={onPokemonSearch} className="border" variant="dark">Buscar</Button>
                 </InputGroup.Prepend>
                 <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={handleChange} onKeyPress={handleKeyDown} value={search}/>
             </InputGroup>

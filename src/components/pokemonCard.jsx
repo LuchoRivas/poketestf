@@ -3,15 +3,11 @@ import { Card, Button, Form, Badge, Col } from "react-bootstrap";
 import DetailModal from "./detailmodal";
 
 const PokeCard = (props) => {
-    const [isShiny, setShiny] = React.useState(false);
+
     const [modalShow, setModalShow] = React.useState(false);
-    const { pokemon } = props
-
-
-    const toggleShiny = () => {
-        setShiny(shiny => !shiny);
-    }
+    const { pokemon, toggleShiny, isShiny } = props;
     const color1 = pokemon && pokemon.types[0].type.name;
+
     return (
         <React.Fragment>
             {
@@ -41,6 +37,6 @@ const PokeCard = (props) => {
             />
         </React.Fragment>
     )
-}
+};
 
 export default PokeCard;

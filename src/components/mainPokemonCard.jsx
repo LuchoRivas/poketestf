@@ -2,10 +2,9 @@ import React from 'react';
 import { Card, Badge, Row, Col } from "react-bootstrap";
 
 const MainPokemonCard = (props) => {
-    const [isShiny, setShiny] = React.useState(false);
-    const { pokemon } = props
+    const { pokemon, isShiny } = props;
     const color1 = pokemon.types[0].type.name;
-    const imgCol = pokemon.sprites.front_female !== null ? 'col-4' : 'col-6'
+    const imgCol = pokemon.sprites.front_female !== null ? 'col-4' : 'col-6';
     return (
         <React.Fragment>
             {
@@ -52,6 +51,6 @@ const MainPokemonCard = (props) => {
             }
         </React.Fragment>
     )
-}
+};
 
 export default MainPokemonCard;

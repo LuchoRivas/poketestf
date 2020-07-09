@@ -19,7 +19,7 @@ import SearchAlert from "./alert";
         if (e.key === 'Enter') {
             await getPokeByName();
         }
-    }
+    };
 
     const onPokemonSearch = async () => {
         await getPokeByName();
@@ -47,6 +47,12 @@ import SearchAlert from "./alert";
         setError(null);
     };
 
+    const [isShiny, setShiny] = React.useState(false);
+
+    const toggleShiny = () => {
+        setShiny(shiny => !shiny);
+    };
+
     return(
         <div>
             <InputGroup className="mb-3 col-8 offset-2">
@@ -58,8 +64,8 @@ import SearchAlert from "./alert";
             {
                 pokemon &&
                 <Row>
-                    <MainPokeCard pokemon={pokemon}></MainPokeCard>
-                    <PokeCard pokemon={pokemon}></PokeCard>
+                    <MainPokeCard isShiny={isShiny} pokemon={pokemon}></MainPokeCard>
+                    <PokeCard toggleShiny={toggleShiny} isShiny={isShiny} pokemon={pokemon}></PokeCard>
                 </Row>
             }
             {
@@ -68,4 +74,4 @@ import SearchAlert from "./alert";
             }
         </div>
     )
-}
+};

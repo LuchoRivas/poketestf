@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Container, Row, Col, Navbar } from "react-bootstrap";
-import Search from "./components/search";
+import Main from "./components/main";
 class App extends React.Component {
 
   render(){
@@ -13,7 +13,7 @@ class App extends React.Component {
         <Container>
           <Row className="d-flex justify-content-center mt-3">
             <Col xs={12}>
-              <Search></Search>
+              <Main></Main>
             </Col>
           </Row>
         </Container>

@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert } from "react-bootstrap";
 
 const SearchAlert = (props) => {
-    const [show, setShow] = React.useState(true);
+    const { errorMsg } = props
+    const [show, setShow] = useState(true);
     return(
         <React.Fragment>
             {
                 show &&
                     <Alert variant="warning" onClose={() => setShow(false)} dismissible>
-                        {props.errorMsg}
+                        {errorMsg}
                     </Alert>
             }
         </React.Fragment>

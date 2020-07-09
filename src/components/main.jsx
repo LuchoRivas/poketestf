@@ -4,13 +4,16 @@ import { getPokemonByName } from "../services/pokemonService";
 import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
 import SearchAlert from "./alert";
+import Swal from "./sweetalert"
 
- export default function Main () {
-
+export default function Main () {
+    
     const [pokemon, setPokemon] = useState(null);
     const [search, setSearch] = useState('');
     const [error, setError] = useState(null);
-
+    const [isShiny, setShiny] = useState(false);
+    const [show, setShow] = useState(false);
+    
     const handleChange = (event) => {
         setSearch(event.target.value);
     };
@@ -33,10 +36,14 @@ import SearchAlert from "./alert";
             setPokemon(pokemon_result);
         }
         catch(err) {
-          if(err.response.status === 500) {
+          if(err.response && err.response.status === 500) {
             const error = 'No se encontraron resultados';
             pokemon && await resetState();
             setError(error);
+          }
+          else {
+            // muestra el sweet alert de error
+            setShow(true)
           }
         }
     };
@@ -47,7 +54,6 @@ import SearchAlert from "./alert";
         setError(null);
     };
 
-    const [isShiny, setShiny] = React.useState(false);
 
     const toggleShiny = () => {
         setShiny(shiny => !shiny);
@@ -72,6 +78,16 @@ import SearchAlert from "./alert";
                 error &&
                     <SearchAlert errorMsg={error}></SearchAlert>
             }
+            {/* Sweet alert de error */}
+            <Swal
+                show={show}
+                setShow={setShow}
+                title={'Error'}
+                text={'Algo esta mal'}
+                type={'error'}
+                confirmButtonText={'Cerrar'}
+            >
+            </Swal>
         </div>
     )
 };

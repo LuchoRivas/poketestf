@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Button, InputGroup, FormControl, Row, Form } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Button, InputGroup, FormControl, Row } from "react-bootstrap";
 import { getPokemonByName } from "../services/pokemonService";
 import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
 import SearchAlert from "./alert";
 
- export default  function Main () {
+ export default function Main () {
 
     const [pokemon, setPokemon] = useState(null);
     const [search, setSearch] = useState(null);
@@ -46,10 +46,6 @@ import SearchAlert from "./alert";
         setSearch(null);
         setError(null);
     };
-
-    useEffect(() => {
-        console.log("ASDASD")
-      }, [search]);
 
     return(
         <div>

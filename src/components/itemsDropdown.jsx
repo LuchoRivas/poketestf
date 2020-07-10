@@ -3,8 +3,9 @@ import { DropdownButton, Dropdown, ButtonGroup } from "react-bootstrap";
 import { useEffect } from 'react';
 
 const ItemsDropdown = (props) => {
-    const { onSelect, items, result, dropdownTitle } = props;
+    const { onSelect, items, dropdownTitle } = props;
     const [options, setOptions] = useState([]);
+    const [selectedOption, setSelectedOption] = useState(false);
     
     // load tipos
     useEffect(() => {
@@ -12,7 +13,10 @@ const ItemsDropdown = (props) => {
         setOptions(types);
     }, []);
 
-
+    // pinta de color la opcion
+    const selectedEvent = (option) => {
+        setSelectedOption(option);
+    };
 
     return(
         <React.Fragment>
@@ -28,8 +32,10 @@ const ItemsDropdown = (props) => {
                         options.map((option, i) => 
                             <Dropdown.Item 
                                 className="text-capitalize"
-                                key={i} 
+                                active={selectedOption === option}
+                                key={`option_${option}`} 
                                 eventKey={`${option}`}
+                                onSelect={() => selectedEvent(option)}
                                 onClick={() => onSelect(option)}>
                                     {option}
                             </Dropdown.Item>

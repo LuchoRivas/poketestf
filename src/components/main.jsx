@@ -12,7 +12,8 @@ import TypesDropdown from "./itemsDropdown";
     const [pokemon, setPokemon] = useState(null);
     const [search, setSearch] = useState(null);
     const [error, setError] = useState(null);
-    const [pokemonTypeResult, setpokemonTypeResult] = useState([]);
+    const [pokemonTypeResult, setPokemonTypeResult] = useState([]);
+    const [pokemonTypeSelected, setPokemonTypeSelected] = useState('');
 
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -57,8 +58,12 @@ import TypesDropdown from "./itemsDropdown";
     };
 
     const onTypeSelect = async (pokeType) => {
+        const alreadySelected = pokemonTypeSelected === pokeType;
+        if(alreadySelected)
+            return;
+        setPokemonTypeSelected(pokeType);
         const result = await getPokemosnByType(pokeType);
-        setpokemonTypeResult(result.pokemon);
+        setPokemonTypeResult(result.pokemon);
     };
 
     return(
@@ -88,7 +93,13 @@ import TypesDropdown from "./itemsDropdown";
                     <SearchAlert errorMsg={error}></SearchAlert>
             }
             {
-                pokemonTypeResult.length > 0 && pokemonTypeResult.map(x => x.pokemon.name)
+                pokemonTypeResult.length > 0 && pokemonTypeResult.map((x, i) => {
+                    return(
+                        <div>
+                            <p>{x.pokemon.name}</p>
+                        </div>
+                    )
+                })
             }
         </div>
     )

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, InputGroup, FormControl, Row } from "react-bootstrap";
+import { Button, InputGroup, FormControl, Row, Col } from "react-bootstrap";
 import { getPokemonByName, getPokemosnByType } from "../services/pokemonService";
 import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
@@ -96,7 +96,11 @@ import TypesDropdown from "./itemsDropdown";
                 pokemonTypeResult.length > 0 && pokemonTypeResult.map((x, i) => {
                     return(
                         <div>
-                            <p>{x.pokemon.name}</p>
+                            <Row>
+                                <Col>
+                                    <p className="text-capitalize text-white">{x.pokemon.name}</p>
+                                </Col>
+                            </Row>
                         </div>
                     )
                 })

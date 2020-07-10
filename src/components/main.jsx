@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Button, InputGroup, FormControl, Row } from "react-bootstrap";
-import { getPokemonByName } from "../services/pokemonService";
+import { getPokemonByName, getPokemosnByType } from "../services/pokemonService";
 import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
 import SearchAlert from "./alert";
-import TypesDropdown from "./typesDropdown";
+import constants from "../constants";
+import TypesDropdown from "./itemsDropdown";
 
  export default function Main () {
 
     const [pokemon, setPokemon] = useState(null);
     const [search, setSearch] = useState(null);
     const [error, setError] = useState(null);
+    const [pokemonTypeResult, setpokemonTypeResult] = useState([]);
 
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -54,11 +56,22 @@ import TypesDropdown from "./typesDropdown";
         setShiny(shiny => !shiny);
     };
 
+    const onTypeSelect = async (pokeType) => {
+        const result = await getPokemosnByType(pokeType);
+        setpokemonTypeResult(result.pokemon);
+    };
+
     return(
         <div>
             <InputGroup className="mb-3 col-8 offset-2">
                 <InputGroup.Prepend>
-                    <TypesDropdown></TypesDropdown>
+                    {/* dropdown */}
+                    <TypesDropdown
+                        items={constants.pokemonTypes || []}
+                        onSelect={onTypeSelect}
+                        dropdownTitle={'Tipos'}
+                    ></TypesDropdown>
+                    {/* panel de busqueda */}
                     <Button onClick={onPokemonSearch} className="border" variant="dark">Buscar</Button>
                 </InputGroup.Prepend>
                 <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={handleChange} onKeyPress={handleKeyDown} value={search}/>
@@ -73,6 +86,9 @@ import TypesDropdown from "./typesDropdown";
             {
                 error &&
                     <SearchAlert errorMsg={error}></SearchAlert>
+            }
+            {
+                pokemonTypeResult.length > 0 && pokemonTypeResult.map(x => x.pokemon.name)
             }
         </div>
     )

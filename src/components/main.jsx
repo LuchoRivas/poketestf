@@ -6,15 +6,19 @@ import MainPokeCard from "./mainPokemonCard";
 import SearchAlert from "./alert";
 import constants from "../constants";
 import TypesDropdown from "./itemsDropdown";
+import Swal from "./sweetalert"
 
- export default function Main () {
-
+export default function Main () {
+    
     const [pokemon, setPokemon] = useState(null);
-    const [search, setSearch] = useState(null);
+    const [search, setSearch] = useState('');
     const [error, setError] = useState(null);
     const [pokemonTypeResult, setPokemonTypeResult] = useState([]);
     const [pokemonTypeSelected, setPokemonTypeSelected] = useState('');
 
+    const [isShiny, setShiny] = useState(false);
+    const [showSweetAlert, setShowSweetAlert] = useState(false);
+    
     const handleChange = (event) => {
         setSearch(event.target.value);
     };
@@ -37,10 +41,14 @@ import TypesDropdown from "./itemsDropdown";
             setPokemon(pokemon_result);
         }
         catch(err) {
-          if(err.response.status === 500) {
+          if(err.response && err.response.status === 500) {
             const error = 'No se encontraron resultados';
             pokemon && await resetState();
             setError(error);
+          }
+          else {
+            // muestra el sweet alert de error
+            setShowSweetAlert(true)
           }
         }
     };
@@ -51,7 +59,6 @@ import TypesDropdown from "./itemsDropdown";
         setError(null);
     };
 
-    const [isShiny, setShiny] = React.useState(false);
 
     const toggleShiny = () => {
         setShiny(shiny => !shiny);
@@ -105,6 +112,16 @@ import TypesDropdown from "./itemsDropdown";
                     )
                 })
             }
+            {/* Sweet alert de error */}
+            <Swal
+                showSweetAlert={showSweetAlert}
+                setShowSweetAlert={setShowSweetAlert}
+                title={'Error'}
+                text={'Algo esta mal'}
+                type={'error'}
+                confirmButtonText={'Cerrar'}
+            >
+            </Swal>
         </div>
     )
 };

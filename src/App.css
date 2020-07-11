@@ -97,3 +97,11 @@
 .close:not(:disabled):not(.disabled):focus {
   outline: none;
 }
+
+#description_carousel {
+  position: initial;
+}
+
+#description_carousel .carousel-caption {
+  position: initial;
+}

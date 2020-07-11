@@ -48,7 +48,7 @@ export default function Main () {
           }
           else {
             // muestra el sweet alert de error
-            setShowSweetAlert(true)
+            setShowSweetAlert(true);
           }
         }
     };
@@ -68,9 +68,14 @@ export default function Main () {
         const alreadySelected = pokemonTypeSelected === pokeType;
         if(alreadySelected)
             return;
-        setPokemonTypeSelected(pokeType);
-        const result = await getPokemosnByType(pokeType);
-        setPokemonTypeResult(result.pokemon);
+        try {
+            setPokemonTypeSelected(pokeType);
+            const result = await getPokemosnByType(pokeType);
+            setPokemonTypeResult(result.pokemon);
+        }
+        catch (err) {
+            setShowSweetAlert(true);
+        }
     };
 
     return(

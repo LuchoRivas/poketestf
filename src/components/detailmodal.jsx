@@ -46,24 +46,28 @@ const DetailModal = (props) => {
                   </Row>
                   <Row>
                     <div className="d-flex col-12">
-                      {
-                        pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) => 
-                            <div key={`${pokemonEvolution.id}_${i}`}>
-                              <Table>
-                                <thead>
-                                  <tr>
-                                    <th key={`${pokemonEvolution.id}_${i}`} className="text-white text-capitalize border-0">{pokemonEvolution.name}</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td className="border-0"><img src={`${pokemonEvolution.sprites.front_default}`} alt={`evolution_image_${pokemonEvolution.id}`} /></td>
-                                  </tr>
-                                </tbody>
-                              </Table>
-                            </div>
-                          )
-                      }
+                        <Table responsive>
+                              <div>
+                                  <thead>
+                                    <tr>
+                                    {
+                                      pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) => 
+                                        <th key={`${pokemonEvolution.id}_${i}`} className="text-white text-capitalize border-0">{pokemonEvolution.name}</th>
+                                      )
+                                    }
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                    {
+                                      pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) =>
+                                        <td className="border-0"><img src={`${pokemonEvolution.sprites.front_default}`} alt={`evolution_image_${pokemonEvolution.id}`} /></td>
+                                      )
+                                    }
+                                    </tr>
+                                  </tbody>
+                              </div>
+                        </Table>
                     </div>
                   </Row>
               </div>

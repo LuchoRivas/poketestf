@@ -5,6 +5,7 @@ import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
 import SearchAlert from "./alert";
 import Swal from "./sweetalert"
+import { useEffect } from 'react';
 
 export default function Main () {
     
@@ -13,7 +14,9 @@ export default function Main () {
     const [error, setError] = useState(null);
     const [isShiny, setShiny] = useState(false);
     const [showSweetAlert, setShowSweetAlert] = useState(false);
-    
+    const [triggerFromModal, setTriggerFromModal] = useState(false);
+    const [modalShow, setModalShow] = useState(false);
+
     const handleChange = (event) => {
         setSearch(event.target.value);
     };
@@ -59,9 +62,19 @@ export default function Main () {
         setShiny(shiny => !shiny);
     };
 
-    const testprop = () => {
-        resetState();
-    }
+    useEffect(() => {
+        if(triggerFromModal) {
+            getPokeByName();
+            setTriggerFromModal(false);
+            setModalShow(false);
+        }
+    }, [search]);
+
+    const triggerSearchFromModal = (pokemonEvolution) => {
+        const value = pokemonEvolution;
+        setTriggerFromModal(true);
+        setSearch(value);
+    };
 
     return(
         <div>
@@ -75,7 +88,13 @@ export default function Main () {
                 pokemon &&
                 <Row>
                     <MainPokeCard isShiny={isShiny} pokemon={pokemon}></MainPokeCard>
-                    <PokeCard toggleShiny={toggleShiny} isShiny={isShiny} pokemon={pokemon} testprop={testprop}></PokeCard>
+                    <PokeCard 
+                        toggleShiny={toggleShiny}
+                        isShiny={isShiny}
+                        pokemon={pokemon}
+                        triggerSearchFromModal={triggerSearchFromModal}
+                        setModalShow={setModalShow}
+                        modalShow={modalShow}></PokeCard>
                 </Row>
             }
             {

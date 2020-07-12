@@ -3,7 +3,7 @@ import { Modal, Col, Row, Badge, Table } from "react-bootstrap";
 import DescriptionCarousel from "./descriptionCarousel";
 
 const DetailModal = (props) => {
-    const { pokemon_data, testprop } = props;
+    const { pokemon_data, onClickEvolution } = props;
       return (
       <Modal
         {...props}
@@ -60,7 +60,7 @@ const DetailModal = (props) => {
                             <tr>
                             {
                               pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) =>
-                                <td onClick={() => testprop()} key={`${pokemonEvolution.id}_${i}`} className="border-0"><img src={`${pokemonEvolution.sprites.front_default}`} alt={`evolution_image_${pokemonEvolution.id}`} /></td>
+                                <td onClick={() => onClickEvolution(pokemonEvolution.name)} key={`${pokemonEvolution.id}_${i}`} className="border-0"><img src={`${pokemonEvolution.sprites.front_default}`} alt={`evolution_image_${pokemonEvolution.id}`} /></td>
                               )
                             }
                             </tr>

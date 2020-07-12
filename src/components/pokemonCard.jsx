@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button, Form, Badge, Col } from "react-bootstrap";
 import DetailModal from "./detailmodal";
 
 const PokeCard = (props) => {
 
-    const [modalShow, setModalShow] = React.useState(false);
-    const { pokemon, toggleShiny, isShiny, testprop } = props;
+    const { pokemon, toggleShiny, isShiny, triggerSearchFromModal, setModalShow, modalShow } = props;
     const color1 = pokemon && pokemon.types[0].type.name;
 
     return (
@@ -34,7 +33,7 @@ const PokeCard = (props) => {
                 pokemon_data={pokemon}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                testprop={testprop}
+                onClickEvolution={triggerSearchFromModal}
             />
         </React.Fragment>
     )

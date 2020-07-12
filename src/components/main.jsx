@@ -50,7 +50,7 @@ export default function Main () {
 
     const resetState = async () => {
         setPokemon(null);
-        setSearch(null);
+        setSearch('');
         setError(null);
     };
 
@@ -58,6 +58,10 @@ export default function Main () {
     const toggleShiny = () => {
         setShiny(shiny => !shiny);
     };
+
+    const testprop = () => {
+        resetState();
+    }
 
     return(
         <div>
@@ -71,7 +75,7 @@ export default function Main () {
                 pokemon &&
                 <Row>
                     <MainPokeCard isShiny={isShiny} pokemon={pokemon}></MainPokeCard>
-                    <PokeCard toggleShiny={toggleShiny} isShiny={isShiny} pokemon={pokemon}></PokeCard>
+                    <PokeCard toggleShiny={toggleShiny} isShiny={isShiny} pokemon={pokemon} testprop={testprop}></PokeCard>
                 </Row>
             }
             {

@@ -3,7 +3,7 @@ import { Modal, Col, Row, Badge, Table } from "react-bootstrap";
 import DescriptionCarousel from "./descriptionCarousel";
 
 const DetailModal = (props) => {
-    const { pokemon_data } = props;
+    const { pokemon_data, testprop } = props;
       return (
       <Modal
         {...props}
@@ -47,26 +47,24 @@ const DetailModal = (props) => {
                   <Row>
                     <div className="d-flex col-12">
                         <Table responsive>
-                              <div>
-                                  <thead>
-                                    <tr>
-                                    {
-                                      pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) => 
-                                        <th key={`${pokemonEvolution.id}_${i}`} className="text-white text-capitalize border-0">{pokemonEvolution.name}</th>
-                                      )
-                                    }
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                    {
-                                      pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) =>
-                                        <td className="border-0"><img src={`${pokemonEvolution.sprites.front_default}`} alt={`evolution_image_${pokemonEvolution.id}`} /></td>
-                                      )
-                                    }
-                                    </tr>
-                                  </tbody>
-                              </div>
+                          <thead>
+                            <tr>
+                            {
+                              pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) => 
+                                <th key={`${pokemonEvolution.id}_${i}`} className="text-white text-capitalize border-0 text-center">{pokemonEvolution.name}</th>
+                              )
+                            }
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                            {
+                              pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) =>
+                                <td onClick={() => testprop()} key={`${pokemonEvolution.id}_${i}`} className="border-0"><img src={`${pokemonEvolution.sprites.front_default}`} alt={`evolution_image_${pokemonEvolution.id}`} /></td>
+                              )
+                            }
+                            </tr>
+                          </tbody>
                         </Table>
                     </div>
                   </Row>

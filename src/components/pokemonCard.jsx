@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Button, Form, Badge, Col } from "react-bootstrap";
 import DetailModal from "./detailmodal";
 

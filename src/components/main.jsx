@@ -64,13 +64,17 @@ export default function Main () {
 
     useEffect(() => {
         if(triggerFromModal) {
-            getPokeByName();
-            setTriggerFromModal(false);
-            setModalShow(false);
+            const searchOnModal = async () => {
+                const pokemon_result = await getPokemonByName(search);
+                setPokemon(pokemon_result);
+                setTriggerFromModal(false);
+                setModalShow(false);
+            };
+            searchOnModal();
         }
-    }, [search]);
+    }, [search, triggerFromModal]);
 
-    const triggerSearchFromModal = (pokemonEvolution) => {
+    const triggerSearchFromModal = async (pokemonEvolution) => {
         const value = pokemonEvolution;
         setTriggerFromModal(true);
         setSearch(value);

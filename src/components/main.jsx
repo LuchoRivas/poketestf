@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, InputGroup, FormControl, Row, Col } from "react-bootstrap";
+import { Button, InputGroup, FormControl, Row, Col, Pagination } from "react-bootstrap";
 import { getPokemonByName, getPokemosnByType } from "../services/pokemonService";
 import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
@@ -13,9 +13,10 @@ export default function Main () {
     const [pokemon, setPokemon] = useState(null);
     const [search, setSearch] = useState('');
     const [error, setError] = useState(null);
-    const [pokemonTypeResult, setPokemonTypeResult] = useState([]);
+    const [pokemonTypeResult, setPokemonTypeResult] = useState({
+        pokemon: []
+    });
     const [pokemonTypeSelected, setPokemonTypeSelected] = useState('');
-
     const [isShiny, setShiny] = useState(false);
     const [showSweetAlert, setShowSweetAlert] = useState(false);
     
@@ -71,12 +72,31 @@ export default function Main () {
         try {
             setPokemonTypeSelected(pokeType);
             const result = await getPokemosnByType(pokeType);
-            setPokemonTypeResult(result.pokemon);
+            setPokemonTypeResult(result);
         }
         catch (err) {
             setShowSweetAlert(true);
         }
     };
+
+    const test = (e) => {
+        alert(`click en ${parseInt(e.target.id)}`)
+    }
+
+    const getPaginationItems = (totalPages) => {
+        const paginationItems = [];
+        let i = 1;
+        while (paginationItems.length < totalPages) {
+            paginationItems.push(
+                    <Pagination.Item 
+                        key={`pagination_item_${i}`}
+                        id={i}
+                        onClick={(e) => test(e)}>{i}</Pagination.Item>
+                );
+            i++
+        }
+        return paginationItems;
+    }
 
     return(
         <div>
@@ -105,7 +125,7 @@ export default function Main () {
                     <SearchAlert errorMsg={error}></SearchAlert>
             }
             {
-                pokemonTypeResult.length > 0 && pokemonTypeResult.map((x, i) => {
+                pokemonTypeResult.pokemon.length > 0 && pokemonTypeResult.pokemon.map((x, i) => {
                     return(
                         <div>
                             <Row>
@@ -116,6 +136,20 @@ export default function Main () {
                         </div>
                     )
                 })
+            }
+            {
+                pokemonTypeResult.pokemon.length > 0 &&
+                    <div>
+                        <Pagination>
+                            <Pagination.First />
+                            <Pagination.Prev />
+                            {
+                                pokemonTypeResult.pagination.totalPage > 1 && getPaginationItems(pokemonTypeResult.pagination.totalPage)
+                            }
+                            <Pagination.Next />
+                            <Pagination.Last />
+                        </Pagination>
+                    </div>
             }
             {/* Sweet alert de error */}
             <Swal

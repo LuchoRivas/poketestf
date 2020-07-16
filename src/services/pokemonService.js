@@ -7,7 +7,7 @@ export async function getPokemonByName(pokemonName) {
   return pokemon;
 }
 
-export async function getPokemosnByType(type) {
-  const { data: pokemon } = await Axios.get(`${apiEndpoint}typeSearch/${type}`);
+export async function getPokemosnByType(type, pagination) {
+  const { data: pokemon } = await Axios.post(`${apiEndpoint}typeSearch/${type}`, pagination);
   return pokemon;
 }

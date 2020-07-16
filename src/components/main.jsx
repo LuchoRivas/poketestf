@@ -14,6 +14,14 @@ export default function Main () {
     const [search, setSearch] = useState('');
     const [error, setError] = useState(null);
     const [pokemonTypeResult, setPokemonTypeResult] = useState({
+        id: 0,
+        pagination: {
+            skip: 0,
+            take: 10,
+            page: 0,
+            total: 0,
+            totalPage: 0
+        },
         pokemon: []
     });
     const [pokemonTypeSelected, setPokemonTypeSelected] = useState('');
@@ -71,7 +79,7 @@ export default function Main () {
             return;
         try {
             setPokemonTypeSelected(pokeType);
-            const result = await getPokemosnByType(pokeType);
+            const result = await getPokemosnByType(pokeType, pokemonTypeResult.pagination);
             setPokemonTypeResult(result);
         }
         catch (err) {
@@ -79,19 +87,40 @@ export default function Main () {
         }
     };
 
-    const test = (e) => {
-        alert(`click en ${parseInt(e.target.id)}`)
+    const test = async (e) => {
+        let button_value = isNaN(parseInt(e.currentTarget.id)) ? e.currentTarget.id : parseInt(e.currentTarget.id);
+        // const alreadySelected = pokemonTypeSelected === pokeType;
+        // if(alreadySelected)
+        //     return;
+        try {
+            // skip: 0,
+            // take: 10,
+            // page: 1,
+            // total: 0,
+            // totalPage: 0
+            // const poke = pokemonTypeSelected;
+            // setPokemonTypeSelected();
+            let request = {
+                ...pokemonTypeResult.pagination,
+                page: button_value
+            }
+            const result = await getPokemosnByType(pokemonTypeSelected, request);
+            setPokemonTypeResult(result);
+        }
+        catch (err) {
+            setShowSweetAlert(true);
+        }
     }
 
     const getPaginationItems = (totalPages) => {
         const paginationItems = [];
-        let i = 1;
+        let i = 0;
         while (paginationItems.length < totalPages) {
             paginationItems.push(
                     <Pagination.Item 
                         key={`pagination_item_${i}`}
                         id={i}
-                        onClick={(e) => test(e)}>{i}</Pagination.Item>
+                        onClick={(e) => test(e)}>{i + 1}</Pagination.Item>
                 );
             i++
         }
@@ -141,13 +170,21 @@ export default function Main () {
                 pokemonTypeResult.pokemon.length > 0 &&
                     <div>
                         <Pagination>
-                            <Pagination.First />
-                            <Pagination.Prev />
+                            <Pagination.First
+                            id='pagination_first'
+                            onClick={(e) => test(e)} />
+                            <Pagination.Prev
+                            id='pagination_prev'
+                            onClick={(e) => test(e)}/>
                             {
                                 pokemonTypeResult.pagination.totalPage > 1 && getPaginationItems(pokemonTypeResult.pagination.totalPage)
                             }
-                            <Pagination.Next />
-                            <Pagination.Last />
+                            <Pagination.Next
+                            id='pagination_next'
+                            onClick={(e) => test(e)} />
+                            <Pagination.Last
+                            id='pagination_last'
+                            onClick={(e) => test(e)} />
                         </Pagination>
                     </div>
             }

@@ -25,18 +25,20 @@ const DetailModal = (props) => {
                           <p>N° {pokemon_data.id}</p>
                           {
                             pokemon_data.types.map(pokemonType => 
-                                    <h5 key={`${pokemonType.type.name}_badge`} className="text-uppercase d-inline"><Badge variant="dark">{pokemonType.type.name}</Badge></h5>
+                              <h5 key={`badge_${pokemonType.type.name}`} className="text-uppercase d-inline"><Badge className={`pokemon-type-${pokemonType.type.name}`} variant="dark">{pokemonType.type.name}</Badge>{' '}</h5>
                             )
                           }
                       </Col>
-                      <Col xs={3}>
+                  <Col xs={3}>
+                    <span><b>Estadisticas:</b></span>
                             {
                               pokemon_data.stats.map(pokemonStat => 
                                 <div key={`stat_${pokemonStat.stat.name}`}><span className="text-capitalize" key={`stat_${pokemonStat.stat.name}`}>{pokemonStat.stat.name}: {pokemonStat.base_stat}</span><br/></div>
                               )
                             }
                       </Col>
-                      <Col xs={6}>
+                  <Col xs={6}>
+                    <span><b>Descripción de la Pokedex:</b></span>
                         {/* descripciones */}
                         <DescriptionCarousel
                           items={pokemon_data.species}
@@ -44,11 +46,12 @@ const DetailModal = (props) => {
                         ></DescriptionCarousel>
                       </Col>
                   </Row>
-                  <Row>
-                    <div className="d-flex col-12">
+                <Row>
+                  <span><b>Linea evolutiva:</b></span>
+                  <div className="d-flex col-12">
                         <Table responsive>
-                              <div>
-                                  <thead>
+                      <div>
+                        <thead>
                                     <tr>
                                     {
                                       pokemon_data.evolutions && pokemon_data.evolutions.map((pokemonEvolution, i) => 

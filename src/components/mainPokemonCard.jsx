@@ -4,7 +4,8 @@ import { Card, Badge, Row, Col } from "react-bootstrap";
 const MainPokemonCard = (props) => {
     const { pokemon, isShiny } = props;
     const color1 = pokemon.types[0].type.name;
-    const imgCol = pokemon.sprites.front_female !== null ? 'col-4' : 'col-6';
+    const female = pokemon.sprites.front_female;
+    const imgCol = female ? 'col-6' : 'col-12'
     return (
         <React.Fragment>
             {
@@ -29,20 +30,20 @@ const MainPokemonCard = (props) => {
                                     <Col xs={12} className={"d-flex justify-content-center"}>
                                         <Card.Img hidden={isShiny} className="col-6" variant="top" alt="pokemon_image" src={`${pokemon.sprites.front_default}`} />
                                         {
-                                            pokemon.sprites.front_female &&
-                                            <Card.Img hidden={isShiny || imgCol === 'col-12'} className="col-6" variant="top" alt="pokemon_image" src={`${pokemon.sprites.front_female || ''}`} /> 
+                                            female &&
+                                        <Card.Img hidden={isShiny || !female} className="col-6" variant="top" alt="pokemon_image" src={`${female || ''}`} /> 
                                         }
                                     </Col>
-                                    <Col>
-                                        <Card.Img hidden={!isShiny} className="col-6" variant="top" alt="pokemon_image" src={`${pokemon.sprites.front_shiny}`} />
-                                        <Card.Img hidden={!isShiny || imgCol === 'col-12'} className="col-6" variant="top" alt="pokemon_image" src={`${pokemon.sprites.front_shiny_female || ''}`} />
+                                <Col xs={12} className={"d-flex justify-content-center"}>
+                                    <Card.Img hidden={!isShiny} className="col-6" variant="top" alt="pokemon_image" src={`${pokemon.sprites.front_shiny}`} />
+                                    <Card.Img hidden={!isShiny || !female} className="col-6" variant="top" alt="pokemon_image" src={`${pokemon.sprites.front_shiny_female || ''}`} />
                                     </Col>
                                 </Row>
-                                <Row hidden={imgCol === 'col-12'}>
-                                    <p className={imgCol}>Macho</p>
+                            <Row hidden={female ? false : true}>
+                                <p className={imgCol}>Macho</p>
                                     {
-                                        pokemon.sprites.front_female &&
-                                        <p className={imgCol}>Hembra</p>
+                                        female &&
+                                    <p className={imgCol}>Hembra</p>
                                     }
                                 </Row>
                             </Card.Body>

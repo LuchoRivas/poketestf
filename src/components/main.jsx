@@ -65,7 +65,7 @@ export default function Main () {
                 <InputGroup.Prepend>
                     <Button onClick={onPokemonSearch} className="border" variant="dark">Buscar</Button>
                 </InputGroup.Prepend>
-                <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={handleChange} onKeyPress={handleKeyDown} value={search}/>
+                <FormControl placeholder="ej: Pikachu" type="text" name="search" aria-describedby="basic-addon1" onChange={handleChange} onKeyPress={(e) => handleKeyDown(e)} value={search}/>
             </InputGroup>
             {
                 pokemon &&

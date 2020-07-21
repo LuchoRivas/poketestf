@@ -5,6 +5,7 @@ import PokeCard from "./pokemonCard";
 import MainPokeCard from "./mainPokemonCard";
 import SearchAlert from "./alert";
 import Swal from "./sweetalert"
+import { useEffect } from 'react';
 
 export default function Main () {
     
@@ -13,7 +14,9 @@ export default function Main () {
     const [error, setError] = useState(null);
     const [isShiny, setShiny] = useState(false);
     const [showSweetAlert, setShowSweetAlert] = useState(false);
-    
+    const [triggerFromModal, setTriggerFromModal] = useState(false);
+    const [modalShow, setModalShow] = useState(false);
+
     const handleChange = (event) => {
         setSearch(event.target.value);
     };
@@ -50,13 +53,31 @@ export default function Main () {
 
     const resetState = async () => {
         setPokemon(null);
-        setSearch(null);
+        setSearch('');
         setError(null);
     };
 
 
     const toggleShiny = () => {
         setShiny(shiny => !shiny);
+    };
+
+    useEffect(() => {
+        if(triggerFromModal) {
+            const searchOnModal = async () => {
+                const pokemon_result = await getPokemonByName(search);
+                setPokemon(pokemon_result);
+                setTriggerFromModal(false);
+                setModalShow(false);
+            };
+            searchOnModal();
+        }
+    }, [search, triggerFromModal]);
+
+    const triggerSearchFromModal = async (pokemonEvolution) => {
+        const value = pokemonEvolution;
+        setTriggerFromModal(true);
+        setSearch(value);
     };
 
     return(
@@ -71,7 +92,13 @@ export default function Main () {
                 pokemon &&
                 <Row>
                     <MainPokeCard isShiny={isShiny} pokemon={pokemon}></MainPokeCard>
-                    <PokeCard toggleShiny={toggleShiny} isShiny={isShiny} pokemon={pokemon}></PokeCard>
+                    <PokeCard 
+                        toggleShiny={toggleShiny}
+                        isShiny={isShiny}
+                        pokemon={pokemon}
+                        triggerSearchFromModal={triggerSearchFromModal}
+                        setModalShow={setModalShow}
+                        modalShow={modalShow}></PokeCard>
                 </Row>
             }
             {

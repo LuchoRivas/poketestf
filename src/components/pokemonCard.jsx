@@ -4,8 +4,7 @@ import DetailModal from "./detailmodal";
 
 const PokeCard = (props) => {
 
-    const [modalShow, setModalShow] = React.useState(false);
-    const { pokemon, toggleShiny, isShiny } = props;
+    const { pokemon, toggleShiny, isShiny, triggerSearchFromModal, setModalShow, modalShow } = props;
     const color1 = pokemon && pokemon.types[0].type.name;
 
     return (
@@ -34,6 +33,7 @@ const PokeCard = (props) => {
                 pokemon_data={pokemon}
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                onClickEvolution={triggerSearchFromModal}
             />
         </React.Fragment>
     )
